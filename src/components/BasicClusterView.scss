@@ -1,0 +1,25 @@
+main {
+  display: grid;
+  grid-template-areas:
+          "BasicView-Header BasicView-ClusterBlock  BasicView-TargetBlock"
+          "BasicView-IndividualBlock BasicView-ClusterBlock  BasicView-TargetBlock";
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: auto 1fr;
+  grid-gap: 0.5rem;
+
+  height: calc(100vh - 2rem);
+
+  & > h1 {
+    grid-area: BasicView-Header;
+
+    font-size: 2em;
+    font-weight: bold;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+    text-transform: uppercase;
+  }
+
+  & > #IndividualBlock { grid-area: BasicView-IndividualBlock; }
+  & > #ClusterBlock { grid-area: BasicView-ClusterBlock; }
+  & > #TargetBlock { grid-area: BasicView-TargetBlock; }
+}

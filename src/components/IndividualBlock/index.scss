@@ -1,0 +1,10 @@
+#IndividualBlock {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 1rem;
+
+  & > header > * {
+    width: 100%;
+    height: 100%;
+  }
+}

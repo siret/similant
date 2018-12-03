@@ -1,0 +1,13 @@
+#TargetBlock {
+  display: grid;
+  grid-template-rows: auto 1fr 1fr 1fr;
+  grid-gap: 1rem;
+
+  & > * {
+    width: 100%;
+  }
+
+  & td {
+    text-align: center;
+  }
+}
