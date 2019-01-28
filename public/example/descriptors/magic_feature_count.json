@@ -1,0 +1,27 @@
+{
+  "id": "Magic Feature (Count)",
+  "title": "Magic Feature (Count)",
+  "type": "time-series",
+  "axis": [
+    "A-I", "A-II", "A-III", "A-IV", "A-V", "A-VI", "A-VII", "A-VIII", "A-IX", "A-X", "A-XI", "A-XII", "B-I", "B-II", "B-III", "B-IV", "B-V", "B-VI", "B-VII", "B-VIII", "B-IX", "B-X", "B-XI", "B-XII"
+  ],
+  "clusters": [
+    {
+      "id": "2",
+      "size": 2,
+      "url": "/data/descriptors/magic_feature_count/2.json"
+    },
+    {
+      "id": "5",
+      "size": 5,
+      "url": "/data/descriptors/magic_feature_count/5.json"
+    }
+  ],
+  "data": {
+    "c1000": [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 2 ],
+    "c1001": [ 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1 ],
+    "c1002": [ 0, 0, 4, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2 ],
+    "c1003": [ 0, 0, 5, 3, 4, 4, 6, 6, 7, 6, 5, 6, 6, 6, 8, 6, 6, 6, 6, 6, 7, 6, 6, 6 ],
+    "c1004": [ 0, 0, 6, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0 ]
+  }
+}

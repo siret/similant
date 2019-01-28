@@ -1,0 +1,80 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>727</x><y>179</y><w>210</w><h>60</h></coordinates><panel_attributes>&lt;&lt;component&gt;&gt;
+BasicClusterView
+{Application}</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>675</x><y>329</y><w>210</w><h>110</h></coordinates><panel_attributes>&lt;&lt;component&gt;&gt;
+ClusterBlock
+{Block}
+--
+**State**
+ - descriptor
+ - cluster
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>775</x><y>229</y><w>30</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>UMLState</id><coordinates><x>375</x><y>679</y><w>130</w><h>90</h></coordinates><panel_attributes>Message
+DescriptorView
+    .show
+    .hide
+halign=left
+type=receiver</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>815</x><y>519</y><w>210</w><h>90</h></coordinates><panel_attributes>&lt;&lt;container&gt;&gt;
+ClusterSliderContainer
+--
+**State**
+ - clusters
+ - idx</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>545</x><y>519</y><w>210</w><h>90</h></coordinates><panel_attributes>&lt;&lt;container&gt;&gt;
+DescriptorSelectorContainer
+--
+**State**
+ - descriptors
+ - idx</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>815</x><y>679</y><w>210</w><h>130</h></coordinates><panel_attributes>&lt;&lt;instance&gt;&gt;
+ClusterSlider
+--
+**State**
+ - idx
+--
+**Props**
+ - clusters
+ - value</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>545</x><y>679</y><w>210</w><h>90</h></coordinates><panel_attributes>&lt;&lt;instance&gt;&gt;
+DescriptorSelector
+--
+**Props**
+ - descriptors
+ - value</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>295</x><y>519</y><w>210</w><h>130</h></coordinates><panel_attributes>&lt;&lt;chart&gt;&gt;
+DescriptorView
+--
+**State**
+ - descriptor
+ - series
+--
+**Props**
+ - descriptor</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1065</x><y>469</y><w>210</w><h>140</h></coordinates><panel_attributes>&lt;&lt;chart&gt;&gt;
+ClusterView
+--
+**State**
+ - cluster
+ - selected
+--
+**Props**
+ - cluster
+ - selected</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>685</x><y>599</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>705</x><y>599</y><w>110</w><h>100</h></coordinates><panel_attributes>lt=&lt;..
+m1=handleChange
+m2=onChange</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>705</x><y>429</y><w>120</w><h>110</h></coordinates><panel_attributes>lt=&lt;..
+m1=handleDescriptor
+m2=onChange</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>685</x><y>429</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>395</x><y>399</y><w>300</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>280;10;10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>825</x><y>429</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>845</x><y>429</y><w>100</w><h>110</h></coordinates><panel_attributes>lt=&lt;..
+m1=handleCluster
+m2=onChange</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>825</x><y>599</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>845</x><y>599</y><w>110</w><h>100</h></coordinates><panel_attributes>lt=&lt;..
+m1=handleChange
+m2=onChange</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>875</x><y>399</y><w>310</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;290;10;290;70</additional_attributes></element><element><id>Relation</id><coordinates><x>875</x><y>379</y><w>380</w><h>110</h></coordinates><panel_attributes>lt=&lt;..
+m1=handleClusterSelected
+m2=onChange</panel_attributes><additional_attributes>10;10;310;10;310;90</additional_attributes></element><element><id>Relation</id><coordinates><x>875</x><y>339</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>90;10;10;10</additional_attributes></element><element><id>UMLState</id><coordinates><x>1115</x><y>669</y><w>130</w><h>140</h></coordinates><panel_attributes>Message
+CLUSTER
+TargetView
+    .show
+    .hide
+DescriptorView
+    .show
+    .hide
+halign=left
+type=sender</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>455</x><y>639</y><w>30</w><h>60</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>UMLState</id><coordinates><x>965</x><y>279</y><w>130</w><h>90</h></coordinates><panel_attributes>Message
+TargetView.show
+DescriptorView
+    .show
+    .hide
+halign=left
+type=sender</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1165</x><y>599</y><w>30</w><h>90</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>275</x><y>239</y><w>1030</w><h>600</h></coordinates><panel_attributes>IndividualBlock</panel_attributes><additional_attributes></additional_attributes></element></diagram>

@@ -1,0 +1,45 @@
+<diagram program="umletino" version="14.3.0"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>1122</x><y>130</y><w>210</w><h>60</h></coordinates><panel_attributes>&lt;&lt;component&gt;&gt;
+BasicClusterView
+{Application}</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1132</x><y>180</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>962</x><y>230</y><w>210</w><h>140</h></coordinates><panel_attributes>&lt;&lt;component&gt;&gt;
+TargetBlock
+{Block}
+--
+**State**
+ - target
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1012</x><y>360</y><w>30</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>360</y><w>100</w><h>120</h></coordinates><panel_attributes>lt=&lt;..
+m1=handleTarget
+m2=onChange</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>902</x><y>460</y><w>210</w><h>100</h></coordinates><panel_attributes>&lt;&lt;container&gt;&gt;
+TargetSelectorContainer
+--
+**State**
+ - targets
+ - idx</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1012</x><y>550</y><w>30</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>550</y><w>110</w><h>120</h></coordinates><panel_attributes>lt=&lt;..
+m1=handleChange
+m2=onChange</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>902</x><y>650</y><w>210</w><h>90</h></coordinates><panel_attributes>&lt;&lt;instance&gt;&gt;
+TargetSelector
+--
+**Props**
+ - targets
+ - value</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1132</x><y>630</y><w>210</w><h>110</h></coordinates><panel_attributes>&lt;&lt;table&gt;&gt;
+TargetTable
+--
+**State**
+ - cluster
+--
+**Props**
+ - data</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1142</x><y>360</y><w>30</w><h>290</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;270</additional_attributes></element><element><id>UMLState</id><coordinates><x>1182</x><y>560</y><w>100</w><h>40</h></coordinates><panel_attributes>Message
+CLUSTER
+type=receiver</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1272</x><y>570</y><w>60</w><h>80</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>40;60;40;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1182</x><y>400</y><w>210</w><h>130</h></coordinates><panel_attributes>&lt;&lt;chart&gt;&gt;
+TargetView
+--
+**State**
+ - target
+ - series
+--
+**Props**
+ - target</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1162</x><y>320</y><w>60</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;40;10;40;80</additional_attributes></element><element><id>UMLState</id><coordinates><x>1222</x><y>310</y><w>100</w><h>60</h></coordinates><panel_attributes>Message
+TargetView
+    .show
+    .hide
+halign=left
+type=receiver</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1312</x><y>330</y><w>60</w><h>90</h></coordinates><panel_attributes>lt=&lt;..</panel_attributes><additional_attributes>40;70;40;10;10;10</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>882</x><y>190</y><w>530</w><h>570</h></coordinates><panel_attributes>TargetBlock</panel_attributes><additional_attributes></additional_attributes></element></diagram>

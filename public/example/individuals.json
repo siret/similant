@@ -1,0 +1,42 @@
+{
+  "c1000": {
+    "id": "c1000",
+    "data": {
+      "title": "Abracadabra",
+      "type": "A",
+      "power": "31"
+    }
+  },
+  "c1001": {
+    "id": "c1001",
+    "data": {
+      "title": "Hocus Pocus",
+      "type": "B",
+      "power": "23"
+    }
+  },
+  "c1002": {
+    "id": "c1002",
+    "data": {
+      "title": "Sesame Open",
+      "type": "A",
+      "power": "27"
+    }
+  },
+  "c1003": {
+    "id": "c1003",
+    "data": {
+      "title": "Simsalabim",
+      "type": "B",
+      "power": "19"
+    }
+  },
+  "c1004": {
+    "id": "c1004",
+    "data": {
+      "title": "Just a spell",
+      "type": "A",
+      "power": "20"
+    }
+  }
+}

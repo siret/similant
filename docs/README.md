@@ -1,6 +1,6 @@
 # SimilAnT
 
-Analytický nástroj pro modelování podobností.
+SIMILANT je analytický nástroj pro modelování podobností.
 
 ## Použité knihovny
 

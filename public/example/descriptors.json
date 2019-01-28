@@ -1,0 +1,7 @@
+[
+  {
+    "id": "magic_feature_count",
+    "name": "Magic Feature (Count) [Chi2] <T-SNE>",
+    "url": "data/descriptors/magic_feature_count.json"
+  }
+]

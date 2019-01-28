@@ -1,0 +1,12 @@
+{
+  "name": "example_type",
+  "type": "ordinal",
+  "axis": [ "A", "B" ],
+  "data": {
+    "c1000" : "A",
+    "c1001" : "B",
+    "c1002" : "A",
+    "c1003" : "B",
+    "c1004" : "A"
+  }
+}

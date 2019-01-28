@@ -1,0 +1,2 @@
+# Workflow analytického nástroje SIMILANT
+

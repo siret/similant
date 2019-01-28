@@ -13,7 +13,7 @@ class DescriptorSelectorContainer extends Component {
 	}
 
 	fetchDescriptors() {
-		fetch('/data/descriptors.json')
+		fetch('data/descriptors.json')
 			.then(res => res.json())
 			.then(
 				descriptors => this.setState({descriptors: [{name: "", url: null}].concat(descriptors)}),

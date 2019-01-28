@@ -13,7 +13,7 @@ class TargetSelectorContainer extends Component {
 	}
 
 	fetchTargets() {
-		fetch('/data/targets.json')
+		fetch('data/targets.json')
 			.then(res => res.json())
 			.then(
 				targets => this.setState({targets: [{name: "", url: null}].concat(targets)}),

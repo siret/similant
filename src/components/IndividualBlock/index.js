@@ -24,7 +24,7 @@ class IndividualBlock extends Component {
 
 	fetchIndividual(individual) {
 		if (this.individuals === null) {
-			fetch("/data/individuals.json#" + individual)
+			fetch("data/individuals.json#" + individual)
 				.then(res => res.json())
 				.then(
 					individualData => {
@@ -39,7 +39,9 @@ class IndividualBlock extends Component {
 						}
 					},
 					error => {
-						this.setState({individual: null});
+						if (this.state.individual !== null) {
+							this.setState({individual: null});
+						}
 						PubSub.publish("ERROR", "Cannot load data from /data/individuals.json#" + individual + ".\n" + error)
 					}
 				);
