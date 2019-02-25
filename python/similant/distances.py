@@ -41,25 +41,25 @@ def ChiSquare(hist1, hist2):
 def JaccardDistance(set1, set2):
     if len(set1) == 0 and len(set2) == 0:
         return 1
-    _and = set(set1).intersection(set(set2))
-    _or = set(set1).union(set(set2))
-    return (len(_or) - len(_and))/len(_or)
+    and_ = set(set1).intersection(set(set2))
+    or_ = set(set1).union(set(set2))
+    return (len(or_) - len(and_))/len(or_)
 
 def LevenshteinDistance(str1, str2):
     if (str1 == str2):
         return 0;
-    LD = np.full((len(str1)+1, len(str2)+1), 0)
+    ld = np.full((len(str1)+1, len(str2)+1), 0)
         
     for i in range(1,len(str1)+1):
-        LD[i, 0] = i;
+        ld[i, 0] = i;
     for j in range(1,len(str2)+1):
-        LD[0, j] = j;
+        ld[0, j] = j;
     
     for j in range(1,len(str2)+1):
         for i in range(1,len(str1)+1):
             subCost = 1
             if (str1[i-1] == str2[j-1]):
                 subCost = 0
-            LD[i, j] = min(LD[i-1, j] + 1, LD[i, j-1] + 1, LD[i-1, j-1] + subCost)
+            ld[i, j] = min(ld[i-1, j] + 1, ld[i, j-1] + 1, ld[i-1, j-1] + subCost)
             
-    return LD[len(str1), len(str2)]
+    return ld[len(str1), len(str2)]
