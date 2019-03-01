@@ -33,3 +33,12 @@ def main(argv):
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
+
+""" script.py
+Generate model files for SIMILANT.
+[I] Edit used distance function. 
+[II] Run as "python ./script.py <filename_without_csv> <number_of_clusters> <title_of_model>"
+[III] Move all generated files (<name>.json and <name> folder) into /data/descriptors folder
+[IV] Add new entry into /data/descriptors.json (suggested entry printed in stdout)
+[V] Result should be visible in browser, after "npm start". 
+"""
