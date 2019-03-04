@@ -57,7 +57,7 @@ def process_clustering(
     return {
         "id": model_info["title"],
         "name": model_info["title"],
-        "url": "/data/descriptors/" + descriptor_name + ".json"
+        "url": "/data/descriptors/" + model_info["id"] + ".json"
     }
 
 
