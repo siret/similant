@@ -2,13 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import csv
-import sys
 import os
 import argparse
 import json
 import logging
 
-from similant.distances import pairwise_distance, JaccardDistance
+from similant.distances import pairwise_distance, distance_factory
 from similant.clustering import process_clustering
 
 
@@ -19,20 +18,38 @@ def main():
         datefmt="%H:%M:%S")
 
     args = read_configuration()
+    logging.info("Loading descriptors ...")
     descriptors = load_descriptors(args["input"])
-    distances = pairwise_distance(descriptors, JaccardDistance)
-    model_reference = process_clustering(
+
+    logging.info("Computing distances ...")
+    distance_function = distance_factory(args["distance"])
+    distances = pairwise_distance(descriptors, distance_function)
+
+    model_info = {
+        "id": args["model_name"],
+        "title": args["model_name"],
+        "type": "set"
+    }
+
+    process_clustering(
         descriptors,
         distances,
         args["clusters_count"],
         args["output"],
-        {
-            "id": args["model_name"],
-            "title": args["model_name"],
-            "type": "set"
-        })
+        model_info,
+        args.get("rewrite", False))
+
+    model_reference = {
+        "id": model_info["title"],
+        "name": model_info["title"],
+        "url": "/data/descriptors/" + model_info["id"] + ".json"
+    }
+
     if args.get("add", False):
+        logging.info("Updating descriptors file ...")
         add_to_descriptors(model_reference)
+
+    logging.info("Done")
 
 
 def read_configuration():
@@ -54,6 +71,13 @@ def read_configuration():
                         type=int, dest="clusters_count", required=False,
                         default=50,
                         help="Number of clusters.")
+    parser.add_argument("--rewrite",
+                        dest="rewrite", action="store_true", required=False,
+                        help="If set, existing models are regenerated..")
+    parser.add_argument("--distance",
+                        type=str, dest="distance", required=False,
+                        default="Jaccard",
+                        help="Similarity method to use.")
 
     args = vars(parser.parse_args())
 
@@ -94,6 +118,10 @@ def add_to_descriptors(reference):
     else:
         data = []
     data.append(reference)
+
+    # Make unique by ID.
+    data = list({item["id"]: item for item in data}.values())
+    data.sort(key=lambda item: item["name"])
     with open(descriptors_path, "w") as out_stream:
         json.dump(data, out_stream)
 

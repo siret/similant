@@ -3,7 +3,6 @@
 
 import os
 import json
-import time
 import logging
 
 import pandas as pd
@@ -13,25 +12,17 @@ from sklearn.manifold import TSNE
 
 
 def process_clustering(
-        descriptors, distance_table, n_clusters, output_directory, model_info):
+        descriptors, distance_table, n_clusters, output_directory, model_info,
+        rewrite):
     assert n_clusters < len(distance_table), "Too many clusters required."
     descriptor_clusters = []
 
     os.makedirs(os.path.join(output_directory, model_info["id"]), exist_ok=True)
     for index in range(1, n_clusters + 1):
-        logging.info("Creating cluster: %i", index)
-        model = clustering(distance_table, index)
-
-        clusters = _clusters_visualization(
-            model["results"], model["clusters"], descriptors)
-
         clustering_output_file = os.path.join(
             output_directory,
             model_info["id"],
             str(index) + ".json")
-
-        with open(clustering_output_file, "w") as outfile:
-            json.dump(clusters, outfile)
 
         descriptor_clusters.append({
             "id": str(index),
@@ -39,6 +30,18 @@ def process_clustering(
             "url": "data/descriptors/{}/{}.json".format(
                 str(model_info["id"]), str(index))
         })
+
+        if not rewrite and os.path.exists(clustering_output_file):
+            continue
+
+        logging.info("Creating cluster: %i", index)
+        model = _clustering(distance_table, index)
+
+        clusters = _clusters_visualization(
+            model["results"], model["clusters"], descriptors)
+
+        with open(clustering_output_file, "w") as outfile:
+            json.dump(clusters, outfile)
 
     descriptor_data = {}
     for desc in descriptors:
@@ -54,14 +57,8 @@ def process_clustering(
     with open(descriptors_output_path, "w") as outfile:
         json.dump(model, outfile)
 
-    return {
-        "id": model_info["title"],
-        "name": model_info["title"],
-        "url": "/data/descriptors/" + model_info["id"] + ".json"
-    }
 
-
-def clustering(distance_table, n_clusters):
+def _clustering(distance_table, n_clusters):
     model = _clustering_generate(distance_table, n_clusters)
     results = pd.DataFrame(
         data={"cluster": model.labels_},
