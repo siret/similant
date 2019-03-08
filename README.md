@@ -195,12 +195,12 @@ id,data
 
 ### Usage
 
-Move CSV file into same folder as `script.py`. Use it as:
-
+New models can be added using Python script: 
 ```sh
-python script.py <filename without CSV extension> <number of clusters> <model name>
+python add_model.py -i <path to CSV file> --add
 ```
 
-File `<filename without CSV extension>.json` and `<filename without CSV extension>/` folder will be generated. Move both into `/public/data/descriptors` folder (for SIMILANT Browser). At the end of the script the *model record* was printed to stdout. Add this entry into `descriptors.json`.
-
-> Current version of script is set to use Jaccard distance and T-SNE visualization. The distance can be changed in the `script.py`.
+All options can be listed using following command: 
+```sh
+python add_model.py -h
+```
