@@ -34,11 +34,15 @@ class IndividualSelectorContainer extends Component {
 
 		if (individual) {
 			PubSub.publish('DescriptorView.show', {
+				id: 'individual',
 				name: 'Individual',
-				data: [individual]
+				data: {
+					'medoid': individual,
+					'entries': [ individual ]
+				}
 			});
 		} else {
-			PubSub.publish('DescriptorView.hide', 'Individual');
+			PubSub.publish('DescriptorView.hide', 'individual');
 		}
 	}
 

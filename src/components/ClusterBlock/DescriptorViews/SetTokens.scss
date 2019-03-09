@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.descriptor-view.set-tokens {
+  width: 100%;
+  display: flex;
+
+  & > .descriptor {
+    flex-grow: 1;
+    text-align: center;
+
+    & > strong {
+      font-weight: bold;
+    }
+  }
+}

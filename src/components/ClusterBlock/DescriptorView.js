@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactEcharts from 'echarts-for-react';
 import * as PubSub from 'pubsub-js';
+import SetTokens from './DescriptorViews/SetTokens';
 
 class DescriptorView extends Component {
 	constructor(props) {
@@ -11,7 +12,7 @@ class DescriptorView extends Component {
 	componentDidMount() {
 		PubSub.subscribe("DescriptorView.show", (event, series) => {
 			this.setState(state => {
-			  state.series.set(series.name, series);
+			  state.series.set(series.id, series);
 			  return { series: state.series };
 			});
 		});
@@ -58,14 +59,14 @@ class DescriptorView extends Component {
 						return {
 							name: series.name,
 							type: 'bar',
-							data: series.data.map(function (key) {
+							data: series.data.entries.map(function (key) {
 								return _descriptor.data[key];
 							}).reduce(function (value, accumulator) {
 								return accumulator.map(function (num, idx) {
-									return num + value[idx];
+									return Number.parseFloat(num) + Number.parseFloat(value[idx]);
 								});
 							}).map(function (num) {
-								return num / series.data.length;
+								return num / series.data.entries.length;
 							})
 						}
 					})
@@ -78,7 +79,15 @@ class DescriptorView extends Component {
 	render() {
 		if (this.state.descriptor === null)
 			return <div className="DescriptorView">Please choose descriptor...</div>;
-		return <ReactEcharts className="DescriptorView" style={{width: '100%', height: '100%'}} option={this.getOptions()} notMerge={true} lazyUpdate={false} />
+		switch (this.state.descriptor.type) {
+			case 'time-series':
+				return <ReactEcharts className="DescriptorView" style={{width: '100%', height: '100%'}} option={this.getOptions()} notMerge={true} lazyUpdate={false} />;
+			case 'set-tokens':
+				return <SetTokens descriptor={this.state.descriptor} datasets={Array.from(this.state.series.values())} />;
+			default:
+				return <div/>;
+		}
+
 	}
 }
 

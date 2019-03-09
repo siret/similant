@@ -30,8 +30,11 @@ class ClusterBlock extends Component {
 					this.setState({ descriptor: descriptorData, cluster: null }, () => {
 						this.handleCluster(descriptorData.clusters[0]);
 						PubSub.publish("DescriptorView.show", {
-							name: 'Global (Average)',
-							data: Object.keys(descriptorData.data)
+							id: 'dataset',
+							name: 'DataSet',
+							data: {
+								'entries': Object.keys(descriptorData.data)
+							}
 						});
 						PubSub.publish("TargetView.show", {
 							name: "DataSet",
