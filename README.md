@@ -78,9 +78,12 @@ Configuration file `descriptors/<model>.json` contains information about model a
 }
 ```
 
-The support types are:
+The supported types are:
 
- - `time-series` with additional field `axis` (JSON array contains labels of time points).
+- `time-series` with additional field `axis` (JSON array contains labels of time points).
+- `set-tokens` with additional fields
+ 	- `labels` (JSON objects contains translate table from token to label)
+ 	- `limit` (number of most frequent shown tokens)
 
 Clustering files are usually placed in `descriptors/<model>/<size>.json` and contains information about groups of records (clusters).
 
