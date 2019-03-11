@@ -77,6 +77,7 @@ class DescriptorView extends Component {
 	}
 
 	render() {
+		console.log("DescriptorView", this.state);
 		if (this.state.descriptor === null)
 			return <div className="DescriptorView">Please choose descriptor...</div>;
 		switch (this.state.descriptor.type) {
@@ -85,7 +86,7 @@ class DescriptorView extends Component {
 			case 'set-tokens':
 				return <SetTokens descriptor={this.state.descriptor} datasets={Array.from(this.state.series.values())} />;
 			default:
-				return <div/>;
+				return <div>Unknown descriptor: {this.state.descriptor.type}</div>;
 		}
 
 	}
