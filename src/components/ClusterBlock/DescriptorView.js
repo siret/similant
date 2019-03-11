@@ -77,7 +77,6 @@ class DescriptorView extends Component {
 	}
 
 	render() {
-		console.log("DescriptorView", this.state);
 		if (this.state.descriptor === null)
 			return <div className="DescriptorView">Please choose descriptor...</div>;
 		switch (this.state.descriptor.type) {
