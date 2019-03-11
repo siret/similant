@@ -28,7 +28,7 @@ def main():
     model_info = {
         "id": args["model_name"],
         "title": args["model_name"],
-        "type": "set"
+        "type": "set-tokens"
     }
 
     process_clustering(
