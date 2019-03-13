@@ -147,7 +147,7 @@ def _clusters_visualization(results, input_clusters, descriptors):
 
 def _collect_entities(descriptor_data):
     return {value
-            for individual_descriptors in descriptor_data["data"].values()
+            for individual_descriptors in descriptor_data.values()
             for value in individual_descriptors}
 
 
