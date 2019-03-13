@@ -157,6 +157,8 @@ def _collect_entities(descriptor_data):
 def _resolve_labels(terms, labels_path):
     output = {term: term for term in terms}
     for entry in _iterate_jsonl(labels_path):
+        if "label" not in entry:
+            continue
         if entry["id"] in output:
             output[entry["id"]] = entry["label"]
     return output
