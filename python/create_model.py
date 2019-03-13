@@ -101,6 +101,8 @@ def similant_path():
 
 
 def load_descriptors(descriptors_path):
+    if not os.path.exists(descriptors_path):
+        return []
     assert os.path.isfile(descriptors_path)
     with open(descriptors_path) as input_stream:
         reader = csv.reader(input_stream)
