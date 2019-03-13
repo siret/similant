@@ -92,7 +92,7 @@ def read_configuration():
     args = vars(parser.parse_args())
 
     if args.get("add", False):
-        args["output"] = os.path.join(similant_path(), "descriptors")
+        args["output"] = os.path.join(similant_path(args), "descriptors")
 
     if args["model_name"] is None:
         input_file = os.path.basename(args["input"])
