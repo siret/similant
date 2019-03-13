@@ -37,7 +37,8 @@ def main():
         args["clusters_count"],
         args["output"],
         model_info,
-        args.get("rewrite", False))
+        args.get("rewrite", False),
+        args["labels"])
 
     model_reference = {
         "id": model_info["title"],
@@ -78,6 +79,9 @@ def read_configuration():
                         type=str, dest="distance", required=False,
                         default="Jaccard",
                         help="Similarity method to use.")
+    parser.add_argument("--labels",
+                        type=str, dest="labels", required=False,
+                        help="Path to JSONL with labels.")
 
     args = vars(parser.parse_args())
 

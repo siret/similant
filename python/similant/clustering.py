@@ -4,16 +4,25 @@
 import os
 import json
 import logging
+import collections
 
 import pandas as pd
 import numpy as np
+
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.manifold import TSNE
 
+clustering_options = collections.namedtuple("ClusteringOptions", [
+    "model_id", "mode_title", "model_type"
+])
+
 
 def process_clustering(
-        descriptors, distance_table, n_clusters, output_directory, model_info,
-        rewrite):
+        descriptors, distance_table, n_clusters,
+        output_directory,
+        model_info,
+        rewrite,
+        labels_path=None):
     assert n_clusters < len(distance_table), "Too many clusters required."
     descriptor_clusters = []
 
@@ -50,6 +59,10 @@ def process_clustering(
     model = model_info
     model["clusters"] = descriptor_clusters
     model["data"] = descriptor_data
+    if labels_path is not None:
+        model["labels"] = _resolve_labels(
+            _collect_entities(descriptor_data),
+            labels_path)
 
     descriptors_output_path = os.path.join(
         output_directory,
@@ -130,3 +143,23 @@ def _clusters_visualization(results, input_clusters, descriptors):
             descriptors[int(input_clusters[cid]["id"])]["id"]
         output[descriptors[int(cid)]["id"]] = input_clusters[cid]
     return output
+
+
+def _collect_entities(descriptor_data):
+    return {value
+            for individual_descriptors in descriptor_data["data"].values()
+            for value in individual_descriptors}
+
+
+def _resolve_labels(terms, labels_path):
+    output = {term: term for term in terms}
+    for entry in _iterate_jsonl(labels_path):
+        if entry["id"] in output:
+            output[entry["id"]] = entry["label"]
+    return output
+
+
+def _iterate_jsonl(path):
+    with open(path, encoding="utf-8") as input_stream:
+        for line in input_stream:
+            yield json.loads(line)
