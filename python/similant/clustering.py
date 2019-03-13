@@ -23,7 +23,10 @@ def process_clustering(
         model_info,
         rewrite,
         labels_path=None):
-    assert n_clusters < len(distance_table), "Too many clusters required."
+    if n_clusters > len(distance_table):
+        logging.warning("Too many clusters required %i only %i are available",
+                        n_clusters, len(distance_table))
+
     descriptor_clusters = []
 
     os.makedirs(os.path.join(output_directory, model_info["id"]), exist_ok=True)
