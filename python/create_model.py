@@ -18,6 +18,8 @@ def main():
         datefmt="%H:%M:%S")
 
     args = read_configuration()
+    logging.info("Processing: %s", os.path.basename(args["input"]))
+
     logging.info("Loading descriptors ...")
     descriptors = load_descriptors(args["input"])
 
