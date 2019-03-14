@@ -26,6 +26,7 @@ def process_clustering(
     if n_clusters > len(distance_table):
         logging.warning("Too many clusters required %i only %i are available",
                         n_clusters, len(distance_table))
+        n_clusters = len(distance_table)
 
     descriptor_clusters = []
 
