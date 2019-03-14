@@ -51,7 +51,7 @@ def main():
 
     if args.get("add", False):
         logging.info("Updating descriptors file ...")
-        add_to_descriptors(model_reference)
+        add_to_descriptors(args, model_reference)
 
     logging.info("Done")
 
@@ -124,9 +124,9 @@ def load_descriptors(descriptors_path):
         ]
 
 
-def add_to_descriptors(reference):
-    descriptors_path = os.path.join(similant_path(), "descriptors.json")
-    with directory_lock(similant_path()):
+def add_to_descriptors(args, reference):
+    descriptors_path = os.path.join(similant_path(args), "descriptors.json")
+    with directory_lock(similant_path(args)):
         if os.path.exists(descriptors_path):
             with open(descriptors_path) as in_stream:
                 data = json.load(in_stream)
