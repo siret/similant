@@ -1,7 +1,23 @@
 import React, {Component} from 'react';
-import { TagCloud } from "react-tagcloud";
+import {TagCloud} from "react-tagcloud";
+import randomColor from 'randomcolor';
+import objectAssign from 'object-assign';
 
 import "./SetTokens.scss";
+
+const TagRenderer = (tag, size) => {
+	const fontSize = size + 'px';
+	const key = tag.key || tag.value;
+	const color = randomColor({seed: tag.value});
+	const style = objectAssign({}, styles, {color, fontSize});
+	return <span className="tag-cloud-tag" key={key} style={style}>{tag.value}</span>
+};
+
+const styles = {
+	margin: '0px 3px',
+	verticalAlign: 'middle',
+	display: 'inline-block'
+};
 
 class SetTokens extends Component {
 
@@ -17,6 +33,7 @@ class SetTokens extends Component {
 						minSize={12}
 						maxSize={36}
 						shuffle={false}
+						renderer={TagRenderer}
 						tags={Object.entries(dataset.data.entries.reduce((accumulator, value) => {
 							descriptor_.data[value].forEach(val => {
 								if (!accumulator.hasOwnProperty(val))
