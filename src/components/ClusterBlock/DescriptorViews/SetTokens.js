@@ -43,6 +43,7 @@ class SetTokens extends Component {
 							return accumulator;
 						}, {})).sort((a, b) => b[1] - a[1]).slice(0, limit_).map((val) => {
 							return {
+								key: val[0],
 								value: labels_.hasOwnProperty(val[0]) ? labels_[val[0]] : val[0],
 								count: val[1]
 							}
