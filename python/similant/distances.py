@@ -50,7 +50,7 @@ def _chi_square(hist1, hist2):
 
 def _jaccard_distance(set1, set2):
     if len(set1) == 0 and len(set2) == 0:
-        return 1
+        return 0
     and_ = set(set1).intersection(set(set2))
     or_ = set(set1).union(set(set2))
     return (len(or_) - len(and_)) / len(or_)

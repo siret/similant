@@ -12,8 +12,12 @@ class ClusterView extends Component {
 		if (this.state.selected) {
 			PubSub.publish("CLUSTER", this.state.cluster[this.state.selected]);
 			PubSub.publish("DescriptorView.show", {
-				name: 'Cluster (Centroid)',
-				data: [this.state.selected]
+				id: 'cluster',
+				name: 'Cluster',
+				data: {
+					'medoid': this.state.selected,
+					'entries': this.state.cluster[this.state.selected].items
+				}
 			});
 			PubSub.publish("TargetView.show", {
 				name: "Cluster",
@@ -21,7 +25,7 @@ class ClusterView extends Component {
 			});
 		} else {
 			PubSub.publish("CLUSTER", null);
-			PubSub.publish("DescriptorView.hide", 'Cluster (Centroid)');
+			PubSub.publish("DescriptorView.hide", 'cluster');
 			PubSub.publish("TargetView.hide", "Cluster");
 		}
 	}

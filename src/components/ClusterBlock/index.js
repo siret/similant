@@ -17,7 +17,7 @@ class ClusterBlock extends Component {
 		if ( descriptor !== null ) {
 			this.fetchDescriptor(descriptor);
 		} else {
-			PubSub.publish("TargetView.hide", "DataSet");
+			PubSub.publish("TargetView.hide", "global");
 			this.setState({ descriptor: null, cluster: null });
 		}
 	}
@@ -30,8 +30,11 @@ class ClusterBlock extends Component {
 					this.setState({ descriptor: descriptorData, cluster: null }, () => {
 						this.handleCluster(descriptorData.clusters[0]);
 						PubSub.publish("DescriptorView.show", {
-							name: 'Global (Average)',
-							data: Object.keys(descriptorData.data)
+							id: 'global',
+							name: 'Global',
+							data: {
+								'entries': Object.keys(descriptorData.data)
+							}
 						});
 						PubSub.publish("TargetView.show", {
 							name: "DataSet",

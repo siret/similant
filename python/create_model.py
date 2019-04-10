@@ -6,6 +6,7 @@ import os
 import argparse
 import json
 import logging
+import contextlib
 
 from similant.distances import pairwise_distance, distance_factory
 from similant.clustering import process_clustering
@@ -18,6 +19,8 @@ def main():
         datefmt="%H:%M:%S")
 
     args = read_configuration()
+    logging.info("Processing: %s", os.path.basename(args["input"]))
+
     logging.info("Loading descriptors ...")
     descriptors = load_descriptors(args["input"])
 
@@ -28,7 +31,7 @@ def main():
     model_info = {
         "id": args["model_name"],
         "title": args["model_name"],
-        "type": "set"
+        "type": "set-tokens"
     }
 
     process_clustering(
@@ -37,7 +40,8 @@ def main():
         args["clusters_count"],
         args["output"],
         model_info,
-        args.get("rewrite", False))
+        args.get("rewrite", False),
+        args["labels"])
 
     model_reference = {
         "id": model_info["title"],
@@ -47,7 +51,7 @@ def main():
 
     if args.get("add", False):
         logging.info("Updating descriptors file ...")
-        add_to_descriptors(model_reference)
+        add_to_descriptors(args, model_reference)
 
     logging.info("Done")
 
@@ -78,11 +82,17 @@ def read_configuration():
                         type=str, dest="distance", required=False,
                         default="Jaccard",
                         help="Similarity method to use.")
+    parser.add_argument("--labels",
+                        type=str, dest="labels", required=False,
+                        help="Path to JSONL with labels.")
+    parser.add_argument("--similant-data-root",
+                        type=str, dest="similant-data-root", required=False,
+                        help="Output data root directory ~ '/similant/data/'.")
 
     args = vars(parser.parse_args())
 
     if args.get("add", False):
-        args["output"] = os.path.join(similant_path(), "descriptors")
+        args["output"] = os.path.join(similant_path(args), "descriptors")
 
     if args["model_name"] is None:
         input_file = os.path.basename(args["input"])
@@ -91,12 +101,16 @@ def read_configuration():
     return args
 
 
-def similant_path():
+def similant_path(args):
+    if "similant-data-root" in args:
+        return args["similant-data-root"]
     this_dir = os.path.dirname(os.path.realpath(__file__))
     return os.path.join(this_dir, "..", "public", "data")
 
 
 def load_descriptors(descriptors_path):
+    if not os.path.exists(descriptors_path):
+        return []
     assert os.path.isfile(descriptors_path)
     with open(descriptors_path) as input_stream:
         reader = csv.reader(input_stream)
@@ -110,20 +124,41 @@ def load_descriptors(descriptors_path):
         ]
 
 
-def add_to_descriptors(reference):
-    descriptors_path = os.path.join(similant_path(), "descriptors.json")
-    if os.path.exists(descriptors_path):
-        with open(descriptors_path) as in_stream:
-            data = json.load(in_stream)
-    else:
-        data = []
-    data.append(reference)
+def add_to_descriptors(args, reference):
+    descriptors_path = os.path.join(similant_path(args), "descriptors.json")
+    with directory_lock(similant_path(args)):
+        if os.path.exists(descriptors_path):
+            with open(descriptors_path) as in_stream:
+                data = json.load(in_stream)
+        else:
+            data = []
+        data.append(reference)
 
-    # Make unique by ID.
-    data = list({item["id"]: item for item in data}.values())
-    data.sort(key=lambda item: item["name"])
-    with open(descriptors_path, "w") as out_stream:
-        json.dump(data, out_stream)
+        # Make unique by ID.
+        data = list({item["id"]: item for item in data}.values())
+        data.sort(key=lambda item: item["name"])
+        with open(descriptors_path, "w") as out_stream:
+            json.dump(data, out_stream)
+
+
+def open_file(path, mode):
+    the_file = open(path, mode)
+    yield the_file
+    the_file.close()
+
+
+@contextlib.contextmanager
+def directory_lock(path):
+    # This is very optimistic but also easy to do.
+    lock_path = os.path.join(path, "lock-dir")
+    while True:
+        try:
+            os.makedirs(lock_path)
+            break
+        except:
+            continue
+    yield
+    os.removedirs(lock_path)
 
 
 if __name__ == "__main__":
