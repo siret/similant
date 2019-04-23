@@ -125,15 +125,17 @@ def _clustering_generate(distance_table, n_clusters):
 
 
 def _clusters_visualization(results, input_clusters, descriptors):
+    cluster_keys = list(map(lambda x: int(x), list(input_clusters.keys())))
+
     logging.info("t-SNE ...")
-    tsne = TSNE(n_components=2, verbose=0, perplexity=30, n_iter=1000)
-    tsne_results = tsne.fit_transform(results.values)
+    tsne = TSNE(n_components=2, verbose=0, perplexity=30, n_iter=1000, metric="precomputed", random_state=0)
+    manifold_results = tsne.fit_transform(results[cluster_keys][:,cluster_keys])
     logging.info("t-SNE ... done")
 
     for index, cid in enumerate(input_clusters):
         input_clusters[cid]["pos"] = [
-            float(tsne_results[index][0]),
-            float(tsne_results[index][1])
+            float(manifold_results[index][0]),
+            float(manifold_results[index][1])
         ]
 
     output = {}
